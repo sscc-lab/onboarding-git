@@ -16,6 +16,8 @@ Issue → Branch → Commit → Push → Pull Request → Review → Squash Merg
 | `team.md` | 실습 2 — 두 사람이 같은 줄을 고쳐 Conflict를 만든다 |
 | `.github/ISSUE_TEMPLATE/task.md` | Issue를 만들 때 나오는 양식 |
 | `.github/pull_request_template.md` | Pull Request를 만들 때 나오는 양식 |
+| `grading/` | 평가표(`rubric.md`)와 채점 도구 — 실습을 마친 뒤 스스로 점검할 때도 쓴다 |
+| `.claude/skills/grade-git-practice/` | Claude Code에서 «Git 실습 채점해 줘»로 부르는 채점 Skill |
 
 ## 0. 준비
 
