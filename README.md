@@ -176,6 +176,31 @@ Commit 메시지 맨 앞의 `type`은 «무슨 종류의 변경인가»를 한 �
 
 > SSCCOps 실제 Repository는 여기에 범위를 더해 `#694 feat(academicprogram): …`처럼 씁니다. 오늘은 범위를 빼고 씁니다.
 
+### 왜 `#번호`를 붙이나
+
+GitHub는 Commit 메시지 · PR에 적힌 `#1`을 읽어서 기록을 자동으로 잇습니다.
+
+- `#1`이 적힌 곳은 모두 Issue #1로 가는 링크가 됩니다.
+- Issue #1 화면에 그 번호를 언급한 Commit과 PR이 자동으로 쌓입니다.
+- PR 본문에 `Closes #1`(또는 `Fixes #1` · `Resolves #1`)을 쓰면 그 PR이 Merge될 때 Issue #1이 닫힙니다.
+
+> Jira로 일을 관리하는 팀은 같은 자리에 Ticket 키를 씁니다 — `feat/SSCC-123-intro` · `SSCC-123 feat: 자기소개 추가`.
+> Jira와 GitHub를 연동하면 Ticket 화면에 Branch · Commit · PR이 모입니다.
+
+### 이미 `main`에 들어간 것을 고칠 때
+
+**공유된 Branch(`main`)에 올라간 이력은 고쳐 쓰지 않습니다.** `reset`이나 `rebase`로 이력을 바꾼 뒤 `git push --force`로 덮어쓰면,
+같은 Repository를 Clone한 상대의 이력과 어긋나 Commit이 사라지거나 엉뚱한 Conflict가 납니다. 대신 **새 Commit을 더해서** 바로잡습니다.
+
+| 상황 | 방법 | 예 |
+|---|---|---|
+| 변경 자체가 잘못됐다 — 통째로 빼야 한다 | fix Branch에서 `git revert` | `git switch -c fix/#12-revert` → `git revert <해시>` |
+| 방향은 맞고 일부만 틀렸다 | fix Branch에서 고치는 Commit | `git switch -c fix/#12-typo` → 고치고 `#12 fix: 오타 수정` |
+
+어느 쪽이든 평소처럼 **새 Issue → fix Branch → PR → Review → Squash Merge**를 거칩니다. `main`에 직접 Push하지 않습니다.
+
+> 아직 Push하지 않은 **내 Branch**는 `git commit --amend` 등으로 다듬어도 됩니다 — 아직 아무와도 공유하지 않았기 때문입니다.
+
 ## 완료 체크리스트
 
 - [ ] Issue를 만들었다
